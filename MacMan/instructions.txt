@@ -1,0 +1,42 @@
+Create DynamoDB table:
+1. Sign In in AWS Console https://aws.amazon.com
+2. Select Services -> DynamoDB -> Dashboard
+3. Press "Create Table"
+4. Fill fields
+    Table name: MacMan,
+    Partition key: Version, type: String,
+    Sort Key: Command, type: String
+5. Press "Create"
+
+Add command to table:
+1. Select DynamoDB -> Tables -> MacMan -> Items
+2. Press "Create Item"
+3. Fill fields
+    Version: 1.0
+    Command: <command name>
+4. Press "+" -> Append -> String
+5. Fill fields
+    Field: Manual
+    Value: <command manual>
+6. Press "Save"
+
+Grant access to DynamoDB:
+1. Sign In in AWS Console https://aws.amazon.com
+2. Select Services -> Cognito
+3. Press "Create new identity pool"
+4. Fill fields
+    Identity pool name: MacMan
+5. Check "Enable access to unauthenticated identities"
+6. Press "Create Pool"
+7. Press "Don't allow"
+8. You will see message "You have not specified roles for this identity pool. The sample code below will not work until you do. Click here to fix it.". Press the link "Click here to fix it"
+9. Copy-paste your Identity pool ID in Constants.swift file (CognitoIdentityPoolId)
+10. In Constants.swift change CognitoRegionType and DefaultServiceRegionType if you are using non default AWS regions
+11. Under "Please select an unauthenticated role for this identity pool." press "Create new role"
+12. Press "Allow"
+13. Press "Save Changes"
+14. Select Services -> IAM -> Roles
+15. Select Cognito_MacManUnauth_Role
+16. Press "Attach Policy"
+17. Check "AmazonDynamoDBReadOnlyAccess"
+18. Press "Attach Policy"
